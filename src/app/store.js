@@ -1,6 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
+import expensesReducer from './expensesReducer';
 
-export const store = configureStore({
+export default configureStore({
   reducer: {
+    expensesReducer: expensesReducer
   },
 });

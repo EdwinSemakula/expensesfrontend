@@ -1,10 +1,10 @@
-import expenseList from "./components/expenseList";
+import ExpenseList from "./components/ExpenseList";
 
-const App = () => {
+const App = () => (
   <div style={{width: '60%', margin: 'auto'}}>
     <h3>Your Expenses</h3>
-    <expensesList />
+    <ExpenseList />
   </div>
-}
+);
 
 export default App;

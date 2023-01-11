@@ -3,7 +3,7 @@ import { ActionCreators } from "../app/expensesReducer";
 // Reaching out to the API
 
 export const GetExpenses = async (dispatch) => {
-    try{
+    try {
         // api calling
         const expenses = [
             { id: 1, description: 'Groceries', amount: 60.82},

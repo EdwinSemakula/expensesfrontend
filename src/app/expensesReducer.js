@@ -7,7 +7,7 @@ export const ActionTypes = {
 }
 
 export const ActionCreators = {
-    setExpenses: payload => ({ type: ActionTypes.SET_EXPENSES, payload}),
+    setExpenses: payload => ({ type: ActionTypes.SET_EXPENSES, payload }),
 }
 
 //action gets passed in and depending on the type it will return something
@@ -15,5 +15,7 @@ export default (state = initialState, action) => {
     switch (action.type) {
         case ActionTypes.SET_EXPENSES:
             return { ...state, expenses: [...action.payload] };
+        default:
+            return state;
     }
 }
