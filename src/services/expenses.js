@@ -16,3 +16,14 @@ export const GetExpenses = async (dispatch) => {
         console.log('Error')
     }
 }
+
+
+export const NewExpense = async (dispatch, expense) => {
+    try{
+    // api calling
+    dispatch(ActionCreators.newExpense({id: 5, description: expense.description, 
+        amount: expense.amount}));
+    }catch {
+        console.log('Error!');
+    }
+}
