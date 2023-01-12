@@ -1,14 +1,24 @@
 import { Form, Row, Col, Button } from "react-bootstrap";
 import { React, useState, useEffect } from 'react';
-import { NewExpense } from "../services/expenses";
+import { DeleteExpense, EditExpense, NewExpense } from "../services/expenses";
 import { useDispatch } from "react-redux";
 
-export default () => {
+export default ({ expense, setIsEditing}) => {
     const descriptions = ['Groceries', 'Rent', 'Bills', 'Clothes Shopping', 'Restaurants'];
     const [amount, setAmount] = useState(0);
     const [description, setDescription] = useState(descriptions[0]);
     const [isNewExpense, setIsNewExpense] = useState(true);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        if(expense !== undefined){
+            setIsNewExpense(false);
+            setAmount(expense.amount);
+        }
+        else {
+            setIsNewExpense(true);
+        }
+    }, [expense]);
 
     return <Form
         onSubmit={event => {
@@ -17,7 +27,8 @@ export default () => {
                 NewExpense(dispatch, {description: description, amount: amount});
             }
             else{
-                //edit expense
+                EditExpense(dispatch, {id: expense.id, description: description, amount: amount});
+                setIsEditing(false);
             }
         }}
     >
@@ -41,9 +52,11 @@ export default () => {
                 {isNewExpense
                 ? <Button variant='primary' type='submit'>Add</Button>
                 : <div>
-                    <Button variant='danger'>Delete</Button>
-                    <Button variant='success'>Save</Button>
-                    <Button variant='default'>Cancel</Button>
+                    <Button style={{ marginRight: '2px'}} variant='danger' 
+                     onClick={() => DeleteExpense(dispatch, expense)}>Delete</Button>
+                    <Button style={{ marginRight: '2px'}} variant='success'>Save</Button>
+                    <Button style={{ marginRight: '2px'}} variant='default' 
+                    onClick={() => setIsEditing(false)}>Cancel</Button>
                     </div>}   
             </div>
             </Col>
